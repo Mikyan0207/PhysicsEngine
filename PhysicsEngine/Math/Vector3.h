@@ -1,5 +1,6 @@
 #pragma once
 
+#include <PhysicsEngine/Core/Assert.h>
 #include <PhysicsEngine/Math/Float3.h>
 #include <PhysicsEngine/Math/Types.h>
 
@@ -28,6 +29,7 @@ class [[nodiscard]] alignas(PE_VECTOR_ALIGNMENT) Vector3
 
     PE_INLINE float operator[](std::uint32_t index) const
     {
+		PE_ASSERT(index >= 0 && index < 3);
         return m_Value32[index];
     }
 

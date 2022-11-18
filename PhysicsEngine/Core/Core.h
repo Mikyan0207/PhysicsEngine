@@ -1,5 +1,13 @@
 #pragma once
 
+#if defined(_WIN32) || defined(_WIN64)
+#include <winapifamily.h>
+#if WINAPI_FAMILY == WINAPI_FAMILY_APP
+#define PE_PLATFORM_WINDOWS_UWP // Building for Universal Windows Platform
+#endif
+#define PE_PLATFORM_WINDOWS
+#endif
+
 #if defined(__clang__)
 #define PE_COMPILER_CLANG
 #elif defined(__GNUC__)
@@ -45,6 +53,12 @@
 #define PE_MSVC_SUPPRESS_WARNING(w)	PE_PRAGMA(warning (disable : w))
 #else
 #define PE_MSVC_SUPPRESS_WARNING(w)
+#endif
+
+#if defined(PE_PLATFORM_WINDOWS)
+#define PE_BREAKPOINT		__debugbreak()
+#else
+	#error Unknown platform
 #endif
 
 // Disable common warnings triggered by the Physics Engine when compiling with -Wall

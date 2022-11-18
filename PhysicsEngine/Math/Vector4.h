@@ -1,6 +1,8 @@
 #pragma once
 
+#include <PhysicsEngine/Core/Assert.h>
 #include <PhysicsEngine/Math/Types.h>
+
 #include <cstdint>
 #include <type_traits>
 
@@ -22,17 +24,44 @@ class [[nodiscard]] alignas(PE_VECTOR_ALIGNMENT) Vector4
     Vector4(const Vector4& rhs) = default;
     explicit PE_INLINE Vector4(Vector3 rhs);
     PE_INLINE Vector4(Vector3 rhs, float w);
+	PE_INLINE Vector4(float x, float y, float z, float w);
     PE_INLINE Vector4(Type rhs) : m_Value(rhs)
     {
     }
 
     PE_INLINE float operator[](std::uint32_t index) const
     {
-        // TODO(Mikyan): assert < 4.
+        PE_ASSERT(index >= 0 && index < 4);
         return m_Value32[index];
     }
 
-    PE_INLINE float GetX() const
+	PE_INLINE bool operator==(Vector4 rhs) const;
+	PE_INLINE bool operator!=(Vector4 rhs) const
+	{
+		return !(*this == rhs);
+	}
+
+	PE_INLINE Vector4 operator*(Vector4 rhs) const;
+	PE_INLINE Vector4 operator/(Vector4 rhs) const;
+	PE_INLINE Vector4 operator+(Vector4 rhs) const;
+	PE_INLINE Vector4 operator-(Vector4 rhs) const;
+
+	PE_INLINE Vector4 operator*(float s) const;
+	PE_INLINE Vector4 operator/(float s) const;
+	PE_INLINE Vector4 operator+(float s) const;
+	PE_INLINE Vector4 operator-(float s) const;
+
+	PE_INLINE Vector4& operator*=(Vector4 rhs);
+	PE_INLINE Vector4& operator/=(Vector4 rhs);
+	PE_INLINE Vector4& operator+=(Vector4 rhs);
+	PE_INLINE Vector4& operator-=(Vector4 rhs);
+
+	PE_INLINE Vector4& operator*=(float s);
+	PE_INLINE Vector4& operator/=(float s);
+	PE_INLINE Vector4& operator+=(float s);
+	PE_INLINE Vector4& operator-=(float s);
+
+	PE_INLINE float GetX() const
     {
         return m_Value32[0];
     }

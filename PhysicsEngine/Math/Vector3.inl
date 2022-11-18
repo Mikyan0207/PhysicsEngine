@@ -12,7 +12,7 @@ Vector3::Vector3(Vector4 rhs)
     value.m_Data[0] = rhs.m_Value.m_Data[0];
     value.m_Data[1] = rhs.m_Value.m_Data[1];
     value.m_Data[2] = rhs.m_Value.m_Data[2];
-    value.m_Data[3] = rhs.m_Value.m_Data[2];
+    value.m_Data[3] = rhs.m_Value.m_Data[2]; // We don't need Vector4.W
 
     m_Value = value;
 }
@@ -35,48 +35,82 @@ Vector3::Vector3(float x, float y, float z)
 
 bool Vector3::operator==(Vector3 rhs) const
 {
-    return m_Value32[0] == rhs.m_Value32[0] && m_Value32[1] == rhs.m_Value32[1] && m_Value32[2] == rhs.m_Value32[2];
+    return m_Value32[0] == rhs.m_Value32[0]
+		&& m_Value32[1] == rhs.m_Value32[1]
+		&& m_Value32[2] == rhs.m_Value32[2];
 }
 
 Vector3 Vector3::operator*(Vector3 rhs) const
 {
-    return Vector3(m_Value32[0] * rhs.m_Value32[0], m_Value32[1] * rhs.m_Value32[1], m_Value32[2] * m_Value32[2]);
+    return Vector3(
+		m_Value32[0] * rhs.m_Value32[0],
+		m_Value32[1] * rhs.m_Value32[1],
+		m_Value32[2] * m_Value32[2]
+	);
 }
 
 Vector3 Vector3::operator/(Vector3 rhs) const
 {
     // TODO(Mikyan): check Z and W to avoid division by zero.
-    return Vector3(m_Value32[0] / rhs.m_Value32[0], m_Value32[1] / rhs.m_Value32[1], m_Value32[2] / rhs.m_Value32[2]);
+    return Vector3(
+		m_Value32[0] / rhs.m_Value32[0],
+		m_Value32[1] / rhs.m_Value32[1],
+		m_Value32[2] / rhs.m_Value32[2]
+	);
 }
 
 Vector3 Vector3::operator+(Vector3 rhs) const
 {
-    return Vector3(m_Value32[0] + rhs.m_Value32[0], m_Value32[1] + rhs.m_Value32[1], m_Value32[2] + rhs.m_Value32[2]);
+    return Vector3(
+		m_Value32[0] + rhs.m_Value32[0],
+		m_Value32[1] + rhs.m_Value32[1],
+		m_Value32[2] + rhs.m_Value32[2]
+	);
 }
 
 Vector3 Vector3::operator-(Vector3 rhs) const
 {
-    return Vector3(m_Value32[0] - rhs.m_Value32[0], m_Value32[1] - rhs.m_Value32[1], m_Value32[2] - rhs.m_Value32[2]);
+    return Vector3(
+		m_Value32[0] - rhs.m_Value32[0],
+		m_Value32[1] - rhs.m_Value32[1],
+		m_Value32[2] - rhs.m_Value32[2]
+	);
 }
 
 Vector3 Vector3::operator*(float s) const
 {
-    return Vector3(m_Value32[0] * s, m_Value32[1] * s, m_Value32[2] * s);
+    return Vector3(
+		m_Value32[0] * s,
+		m_Value32[1] * s,
+		m_Value32[2] * s
+	);
 }
 
 Vector3 Vector3::operator/(float s) const
 {
-    return Vector3(m_Value32[0] / s, m_Value32[1] / s, m_Value32[2] / s);
+    return Vector3(
+		m_Value32[0] / s,
+		m_Value32[1] / s,
+		m_Value32[2] / s
+	);
 }
 
 Vector3 Vector3::operator+(float s) const
 {
-    return Vector3(m_Value32[0] + s, m_Value32[1] + s, m_Value32[2] + s);
+    return Vector3(
+		m_Value32[0] + s,
+		m_Value32[1] + s,
+		m_Value32[2] + s
+	);
 }
 
 Vector3 Vector3::operator-(float s) const
 {
-    return Vector3(m_Value32[0] - s, m_Value32[1] - s, m_Value32[2] - s);
+    return Vector3(
+		m_Value32[0] - s,
+		m_Value32[1] - s,
+		m_Value32[2] - s
+	);
 }
 
 Vector3& Vector3::operator*=(Vector3 rhs)
@@ -161,7 +195,9 @@ Vector3& Vector3::operator-=(float s)
 
 float Vector3::Dot(Vector3 rhs) const
 {
-    return m_Value32[0] * rhs.m_Value32[0] + m_Value32[1] * rhs.m_Value32[1] + m_Value32[2] * rhs.m_Value32[2];
+    return m_Value32[0] * rhs.m_Value32[0]
+		+ m_Value32[1] * rhs.m_Value32[1]
+		+ m_Value32[2] * rhs.m_Value32[2];
 }
 
 float Vector3::Magnitude() const
@@ -200,13 +236,11 @@ Vector3 Vector3::Normalized() const
 
 Vector3 Vector3::Cross(Vector3 rhs) const
 {
-    Vector3 result;
-
-    result.m_Value32[0] = m_Value32[1] * rhs.m_Value32[2] - m_Value32[2] * rhs.m_Value32[1]; /// X = lhs.Y * rhs.Z - lhs.Z * rhs.Y
-    result.m_Value32[1] = m_Value32[2] * rhs.m_Value32[0] - m_Value32[0] * rhs.m_Value32[2]; /// Y = lhs.Z * rhs.X - lhs.X * rhs.Z
-    result.m_Value32[2] = m_Value32[0] * rhs.m_Value32[1] - m_Value32[1] * rhs.m_Value32[0]; /// Z = lhs.X * rhs.Y - lhs.Y * rhs.X
-
-    return result;
+	return Vector3(
+		m_Value32[1] * rhs.m_Value32[2] - m_Value32[2] * rhs.m_Value32[1], /// X = lhs.Y * rhs.Z - lhs.Z * rhs.Y
+		m_Value32[2] * rhs.m_Value32[0] - m_Value32[0] * rhs.m_Value32[2], /// Y = lhs.Z * rhs.X - lhs.X * rhs.Z
+		m_Value32[0] * rhs.m_Value32[1] - m_Value32[1] * rhs.m_Value32[0]  /// Z = lhs.X * rhs.Y - lhs.Y * rhs.X
+	);
 }
 
 float Vector3::Angle(Vector3 rhs) const
