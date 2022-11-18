@@ -437,3 +437,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Custom
+Build/VS2022*/
