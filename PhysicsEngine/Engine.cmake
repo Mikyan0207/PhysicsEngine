@@ -14,7 +14,10 @@ set(SOURCE_FILES
     ${PHYSICS_ENGINE_ROOT}/Math/Vector3.cpp
     ${PHYSICS_ENGINE_ROOT}/Math/Vector3.inl
     ${PHYSICS_ENGINE_ROOT}/Math/Vector3.h
-    ${PHYSICS_ENGINE_ROOT}/Math/Mat4x4.h)
+    ${PHYSICS_ENGINE_ROOT}/Math/Vector2.h
+    ${PHYSICS_ENGINE_ROOT}/Math/Vector2.inl
+    ${PHYSICS_ENGINE_ROOT}/Math/Mat4x4.h
+    ${PHYSICS_ENGINE_ROOT}/Math/Mat4x4.inl)
 
 if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
 	# Add natvis file

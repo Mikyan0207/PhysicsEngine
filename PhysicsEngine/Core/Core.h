@@ -25,7 +25,8 @@
 #endif
 
 #if defined(__x86_64__) || defined(_M_X64) || defined(__i386__) || defined(_M_IX86)
-#define PE_VECTOR_ALIGNMENT 16
+#define PE_VECTOR2_ALIGNMENT  8
+#define PE_VECTOR4_ALIGNMENT 16
 #endif
 
 

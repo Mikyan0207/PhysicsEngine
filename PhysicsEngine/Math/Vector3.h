@@ -9,13 +9,15 @@
 
 PE_NAMESPACE_BEGIN
 
-class [[nodiscard]] alignas(PE_VECTOR_ALIGNMENT) Vector3
+class [[nodiscard]] alignas(PE_VECTOR4_ALIGNMENT) Vector3
 {
   public:
 #if defined(PE_USE_SSE)
     using Type = __m128;
 #else
-    using Type = Vector4::Type;
+    using Type = struct {
+		float m_Data[3];
+	};
 #endif
 
     Vector3() = default;
@@ -117,7 +119,7 @@ class [[nodiscard]] alignas(PE_VECTOR_ALIGNMENT) Vector3
 
     union {
         Type m_Value;
-        float m_Value32[4];
+        float m_Value32[3];
     };
 };
 
