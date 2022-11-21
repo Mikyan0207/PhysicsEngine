@@ -3,6 +3,7 @@ set(PHYSICS_ENGINE_ROOT ${REPOSITORY_ROOT}/PhysicsEngine)
 set(SOURCE_FILES
     ${PHYSICS_ENGINE_ROOT}/PhysicsEngine.h
     ${PHYSICS_ENGINE_ROOT}/Core/Core.h
+    ${PHYSICS_ENGINE_ROOT}/Core/Assert.cpp
     ${PHYSICS_ENGINE_ROOT}/Core/Assert.h
     ${PHYSICS_ENGINE_ROOT}/Math/Math.h
     ${PHYSICS_ENGINE_ROOT}/Math/Types.h

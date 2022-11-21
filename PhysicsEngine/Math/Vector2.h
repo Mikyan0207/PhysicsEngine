@@ -63,8 +63,6 @@ class [[nodiscard]] alignas(PE_VECTOR2_ALIGNMENT) Vector2
 	PE_INLINE Vector2 Normalized() const;
 	PE_INLINE void Normalize();
 
-	PE_INLINE Vector2 Cross(Vector2 rhs) const;
-
 	PE_INLINE float Angle(Vector2 rhs) const;
 
 	PE_INLINE Vector2 Project(Vector2 rhs) const;
