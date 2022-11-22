@@ -56,4 +56,22 @@ TEST_SUITE("Vector2Tests")
 
 		CHECK(dot == 51);
 	}
+
+	TEST_CASE("Vector2Length")
+	{
+		Vector2 v1(3, 5);
+
+		float length = v1.Length();
+
+		CHECK_FLOAT_EQUAL(length, 5.830951f);
+	}
+
+	TEST_CASE("Vector2LengthSquared")
+	{
+		Vector2 v1(3, 5);
+
+		float length = v1.LengthSquared();
+
+		CHECK_FLOAT_EQUAL(length, 34.0f);
+	}
 }

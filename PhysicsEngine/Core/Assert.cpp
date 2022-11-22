@@ -6,9 +6,9 @@ PE_SUPPRESS_WARNINGS_STD_END
 
 PE_NAMESPACE_BEGIN
 
-static void DummyTrace([[maybe_unused]] const char *fmt, ...) 
+static void DummyTrace([[maybe_unused]] const char *fmt, ...)
 { 
-	PE_ASSERT(false); 
+	PE_ASSERT(false);
 };
 
 TraceFunction Trace = DummyTrace;

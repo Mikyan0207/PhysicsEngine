@@ -2,10 +2,27 @@
 
 PE_NAMESPACE_BEGIN
 
+Vector2::Vector2(Float2 rhs)
+{
+	m_Value32[0] = rhs.X;
+	m_Value32[1] = rhs.Y;
+}
+
+Vector2::Vector2(Vector3 rhs)
+{
+	m_Value32[0] = rhs.m_Value32[0];
+	m_Value32[1] = rhs.m_Value32[1];
+}
+
 Vector2::Vector2(float x, float y)
 {
 	m_Value32[0] = x;
 	m_Value32[1] = y;
+}
+
+Vector2 Vector2::Fill(float v)
+{
+	return Vector2(v, v);
 }
 
 Vector2 Vector2::operator*(Vector2 rhs) const

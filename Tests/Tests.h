@@ -8,3 +8,8 @@ PE_SUPPRESS_WARNINGS_STD_BEGIN
 PE_SUPPRESS_WARNINGS_STD_END
 
 using namespace Physics;
+
+inline void CHECK_FLOAT_EQUAL(float lhs, float rhs, float epsilon = 1.0e-6f)
+{
+	CHECK(std::abs(rhs - lhs) <= epsilon);
+}

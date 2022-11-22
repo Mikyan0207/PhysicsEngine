@@ -1,6 +1,7 @@
 #pragma once
 
 #include <PhysicsEngine/Core/Core.h>
+#include <PhysicsEngine/Core/Assert.h>
 #include <PhysicsEngine/Math/Types.h>
 
 #include <ostream>
@@ -21,10 +22,14 @@ class [[nodiscard]] alignas(PE_VECTOR2_ALIGNMENT) Vector2
 
 	Vector2() = default;
 	Vector2(const Vector2& v) = default;
+	explicit PE_INLINE Vector2(Float2 rhs);
+	explicit PE_INLINE Vector2(Vector3 rhs);
 	PE_INLINE Vector2(float x, float y);
 	PE_INLINE Vector2(Type rhs) : m_Value(rhs)
 	{
 	}
+
+	static PE_INLINE Vector2 Fill(float v);
 
 	PE_INLINE float operator[](std::uint32_t index) const
 	{
