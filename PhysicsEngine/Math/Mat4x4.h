@@ -1,7 +1,6 @@
 #pragma once
 
 #include <PhysicsEngine/Math/Types.h>
-
 #include <ostream>
 
 PE_NAMESPACE_BEGIN

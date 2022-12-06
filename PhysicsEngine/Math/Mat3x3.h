@@ -27,6 +27,22 @@ public:
 		return m_Cols[column].m_Value32[row];
 	}
 
+	PE_INLINE Mat3x3 Mat3x3::operator*(Mat3x3 rhs) const;
+	PE_INLINE Mat3x3 Mat3x3::operator+(Mat3x3 rhs) const;
+	PE_INLINE Mat3x3 Mat3x3::operator-(Mat3x3 rhs) const;
+
+	PE_INLINE Mat3x3 Mat3x3::operator*(float s) const;
+	PE_INLINE Mat3x3 Mat3x3::operator+(float s) const;
+	PE_INLINE Mat3x3 Mat3x3::operator-(float s) const;
+
+	PE_INLINE Mat3x3& Mat3x3::operator*=(Mat3x3 rhs);
+	PE_INLINE Mat3x3& Mat3x3::operator+=(Mat3x3 rhs);
+	PE_INLINE Mat3x3& Mat3x3::operator-=(Mat3x3 rhs);
+
+	PE_INLINE Mat3x3& Mat3x3::operator*=(float s);
+	PE_INLINE Mat3x3& Mat3x3::operator+=(float s);
+	PE_INLINE Mat3x3& Mat3x3::operator-=(float s);
+
 	PE_INLINE Mat3x3 Transposed() const;
 	PE_INLINE float Determinant() const;
 	PE_INLINE Mat3x3 Cofactor() const;

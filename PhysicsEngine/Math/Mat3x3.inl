@@ -1,3 +1,4 @@
+#pragma once
 #include <PhysicsEngine/Math/Vector3.h>
 
 PE_NAMESPACE_BEGIN
@@ -18,6 +19,118 @@ Mat3x3 Mat3x3::Identity()
 		Vector3(0, 1, 0),
 		Vector3(0, 0, 1)
 	);
+}
+
+Mat3x3 Mat3x3::operator*(Mat3x3 rhs) const
+{
+	Mat3x3 result = {};
+
+	for (int i = 0; i < 3; ++i)
+	{
+	    result.m_Cols[i] = m_Cols[0] * rhs.m_Cols[i].m_Value32[0]
+		    + m_Cols[1] * rhs.m_Cols[i].m_Value32[1]
+		    + m_Cols[2] * rhs.m_Cols[i].m_Value32[2];
+    }
+
+	return result;
+}
+
+Mat3x3 Mat3x3::operator+(Mat3x3 rhs) const
+{
+	Mat3x3 result = {};
+
+	for (int i = 0; i < 3; i++)
+		result.m_Cols[i] = m_Cols[i] + rhs.m_Cols[i];
+
+	return result;
+}
+
+Mat3x3 Mat3x3::operator-(Mat3x3 rhs) const
+{
+	Mat3x3 result = {};
+
+	for (int i = 0; i < 3; i++)
+		result.m_Cols[i] = m_Cols[i] - rhs.m_Cols[i];
+
+	return result;
+}
+
+Mat3x3 Mat3x3::operator*(float s) const
+{
+	Vector3 multiplier = Vector3::Fill(s);
+	Mat3x3 result = {};
+
+	for (int i = 0; i < 3; i++)
+		result.m_Cols[i]= m_Cols[i] * multiplier;
+
+	return result;
+}
+
+Mat3x3 Mat3x3::operator+(float s) const
+{
+	Mat3x3 result = {};
+
+	for (int i = 0; i < 3; i++)
+		result.m_Cols[i] = m_Cols[i] + s;
+
+	return result;
+}
+
+Mat3x3 Mat3x3::operator-(float s) const
+{
+	Mat3x3 result = {};
+
+	for (int i = 0; i < 3; i++)
+		result.m_Cols[i] = m_Cols[i] - s;
+
+	return result;
+}
+
+Mat3x3& Mat3x3::operator*=(Mat3x3 rhs)
+{
+	return *this = *this * rhs;
+}
+
+Mat3x3& Mat3x3::operator+=(Mat3x3 rhs)
+{
+	for (int i = 0; i < 3; i++)
+		m_Cols[i] += rhs.m_Cols[i];
+
+	return *this;
+}
+
+Mat3x3& Mat3x3::operator-=(Mat3x3 rhs)
+{
+	for (int i = 0; i < 3; i++)
+		m_Cols[i] -= rhs.m_Cols[i];
+
+	return *this;
+}
+
+Mat3x3& Mat3x3::operator*=(float s)
+{
+	Vector3 multiplier = Vector3::Fill(s);
+
+	for (int i = 0; i < 3; i++)
+		m_Cols[i] *= multiplier;
+
+	return *this;
+}
+
+Mat3x3& Mat3x3::operator+=(float s)
+{
+	for (int i = 0; i < 3; i++)
+		m_Cols[i] += s;
+
+	return *this;
+}
+
+Mat3x3& Mat3x3::operator-=(float s)
+{
+	for (int i = 0; i < 3; i++)
+		m_Cols[i] -= s;
+
+	return *this;
 }
 
 Mat3x3 Mat3x3::Transposed() const

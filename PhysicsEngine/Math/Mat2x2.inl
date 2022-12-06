@@ -1,3 +1,5 @@
+#pragma once
+
 #include <PhysicsEngine/Math/Vector2.h>
 
 PE_NAMESPACE_BEGIN
@@ -37,6 +39,26 @@ Mat2x2 Mat2x2::operator*(Mat2x2 rhs) const
 	return result;
 }
 
+Mat2x2 Mat2x2::operator+(Mat2x2 rhs) const
+{
+	Mat2x2 result = {};
+
+	for (int i = 0; i < 2; i++)
+		result.m_Cols[i] = m_Cols[i] + rhs.m_Cols[i];
+
+	return result;
+}
+
+Mat2x2 Mat2x2::operator-(Mat2x2 rhs) const
+{
+	Mat2x2 result = {};
+
+	for (int i = 0; i < 2; i++)
+		result.m_Cols[i] = m_Cols[i] - rhs.m_Cols[i];
+
+	return result;
+}
+
 Mat2x2 Mat2x2::operator*(float s) const
 {
 	Vector2 multiplier = Vector2::Fill(s);
@@ -46,6 +68,73 @@ Mat2x2 Mat2x2::operator*(float s) const
 		result.m_Cols[i] = m_Cols[i] * multiplier;
 
 	return result;
+}
+
+Mat2x2 Mat2x2::operator+(float s) const
+{
+	Mat2x2 result = {};
+
+	for (int i = 0; i < 2; i++)
+		result.m_Cols[i] = m_Cols[i] + s;
+
+	return result;
+}
+
+Mat2x2 Mat2x2::operator-(float s) const
+{
+	Mat2x2 result = {};
+
+	for (int i = 0; i < 2; i++)
+		result.m_Cols[i] = m_Cols[i] - s;
+
+	return result;
+}
+
+Mat2x2& Mat2x2::operator*=(Mat2x2 rhs)
+{
+	return *this = *this * rhs;
+}
+
+Mat2x2& Mat2x2::operator+=(Mat2x2 rhs)
+{
+	for (int i = 0; i < 2; i++)
+		m_Cols[i] += rhs.m_Cols[i];
+
+	return *this;
+}
+
+Mat2x2& Mat2x2::operator-=(Mat2x2 rhs)
+{
+	for (int i = 0; i < 2; i++)
+		m_Cols[i] -= rhs.m_Cols[i];
+
+	return *this;
+}
+
+Mat2x2& Mat2x2::operator*=(float s)
+{
+	Vector2 multiplier = Vector2::Fill(s);
+
+	for (int i = 0; i < 2; i++)
+		m_Cols[i] *= multiplier;
+
+	return *this;
+}
+
+Mat2x2& Mat2x2::operator+=(float s)
+{
+	for (int i = 0; i < 2; i++)
+		m_Cols[i] += s;
+
+	return *this;
+}
+
+Mat2x2& Mat2x2::operator-=(float s)
+{
+	for (int i = 0; i < 2; i++)
+		m_Cols[i] -= s;
+
+	return *this;
 }
 
 Mat2x2 Mat2x2::Transposed() const

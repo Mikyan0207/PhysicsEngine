@@ -7,6 +7,7 @@ set(TESTS_SOURCE_FILES
   ${TESTS_ROOT}/Math/Vector4Tests.cpp
   ${TESTS_ROOT}/Math/Mat2x2Tests.cpp
   ${TESTS_ROOT}/Math/Mat3x3Tests.cpp
+  ${TESTS_ROOT}/Math/Mat4x4Tests.cpp
   ${TESTS_ROOT}/Tests.cpp
   ${TESTS_ROOT}/Tests.h
   ${TESTS_ROOT}/Tests.cmake)

@@ -31,6 +31,11 @@ Vector3::Vector3(float x, float y, float z)
     m_Value32[2] = z;
 }
 
+Vector3 Vector3::Fill(float v)
+{
+	return Vector3(v, v, v);
+}
+
 bool Vector3::operator==(Vector3 rhs) const
 {
     return m_Value32[0] == rhs.m_Value32[0]
