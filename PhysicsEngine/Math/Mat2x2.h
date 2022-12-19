@@ -48,6 +48,8 @@ class [[nodiscard]] alignas(PE_VECTOR2_ALIGNMENT) Mat2x2
 	PE_INLINE Mat2x2 Transposed() const;
 	PE_INLINE float Determinant() const;
 	PE_INLINE Mat2x2 Cofactor() const;
+	PE_INLINE Mat2x2 Adjointed() const;
+	PE_INLINE Mat2x2 Inversed() const;
 
 	Vector2 m_Cols[2];
 };

@@ -46,6 +46,10 @@ public:
 	PE_INLINE Mat4x4& operator-=(float s);
 
 	PE_INLINE Mat4x4 Transposed() const;
+	PE_INLINE float Determinant() const;
+	PE_INLINE Mat4x4 Cofactor() const;
+	PE_INLINE Mat4x4 Adjointed() const;
+	PE_INLINE Mat4x4 Inversed() const;
 
 	friend std::ostream& operator<<(std::ostream& stream, Mat4x4 m)
 	{

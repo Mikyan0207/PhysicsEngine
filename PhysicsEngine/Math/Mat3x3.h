@@ -46,6 +46,8 @@ public:
 	PE_INLINE Mat3x3 Transposed() const;
 	PE_INLINE float Determinant() const;
 	PE_INLINE Mat3x3 Cofactor() const;
+	PE_INLINE Mat3x3 Adjointed() const;
+	PE_INLINE Mat3x3 Inversed() const;
 
 	Vector3 m_Cols[3];
 };

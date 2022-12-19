@@ -1,4 +1,5 @@
 #pragma once
+#include <PhysicsEngine/Math/Math.h>
 #include <PhysicsEngine/Math/Vector3.h>
 
 PE_NAMESPACE_BEGIN
@@ -170,6 +171,26 @@ Mat3x3 Mat3x3::Cofactor() const
 			+(M(0, 0) * M(1, 1) - M(0, 1) * M(1, 0))
 		)
 	);
+}
+
+Mat3x3 Mat3x3::Adjointed() const
+{
+	return Cofactor().Transposed();
+}
+
+Mat3x3 Mat3x3::Inversed() const
+{
+#if defined(PE_USE_SEE)
+#else
+
+	float const det = Determinant();
+
+	if (PE_FLOAT_CMP(det, 0.0f))
+		return Mat3x3();
+
+	return Adjointed() * (1.0f / det);
+
+#endif
 }
 
 PE_NAMESPACE_END

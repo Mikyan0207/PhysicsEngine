@@ -1,5 +1,5 @@
 #pragma once
-
+#include <PhysicsEngine/Math/Math.h>
 #include <PhysicsEngine/Math/Vector2.h>
 
 PE_NAMESPACE_BEGIN
@@ -160,6 +160,26 @@ Mat2x2 Mat2x2::Cofactor() const
 		Vector2(M(1, 1), -M(0, 1)),
 		Vector2(-M(1, 0), M(0, 0))
 	);
+}
+
+Mat2x2 Mat2x2::Adjointed() const
+{
+	return Cofactor().Transposed();
+}
+
+Mat2x2 Mat2x2::Inversed() const
+{
+#if defined(PE_USE_SSE)
+#else
+
+	float const det = Determinant();
+
+	if (PE_FLOAT_CMP(det, 0.0f))
+		return Mat2x2();
+
+	return Adjointed() * (1.0f / det);
+
+#endif
 }
 
 PE_NAMESPACE_END
