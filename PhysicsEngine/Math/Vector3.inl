@@ -1,4 +1,5 @@
 #include <PhysicsEngine/Math/Vector4.h>
+
 #include <cmath>
 
 PE_NAMESPACE_BEGIN
@@ -7,12 +8,11 @@ PE_NAMESPACE_BEGIN
 
 Vector3::Vector3(Vector4 rhs)
 {
-    Type value;
+	Type value = {};
 
     value.m_Data[0] = rhs.m_Value.m_Data[0];
     value.m_Data[1] = rhs.m_Value.m_Data[1];
     value.m_Data[2] = rhs.m_Value.m_Data[2];
-    value.m_Data[3] = rhs.m_Value.m_Data[2]; // We don't need Vector4.W
 
     m_Value = value;
 }
@@ -22,7 +22,6 @@ Vector3::Vector3(const Float3& v)
     m_Value32[0] = v[0];
     m_Value32[1] = v[1];
     m_Value32[2] = v[2];
-    m_Value32[3] = v[2];
 }
 
 Vector3::Vector3(float x, float y, float z)
@@ -30,7 +29,11 @@ Vector3::Vector3(float x, float y, float z)
     m_Value32[0] = x;
     m_Value32[1] = y;
     m_Value32[2] = z;
-    m_Value32[3] = z;
+}
+
+Vector3 Vector3::Fill(float v)
+{
+	return Vector3(v, v, v);
 }
 
 bool Vector3::operator==(Vector3 rhs) const
@@ -51,7 +54,7 @@ Vector3 Vector3::operator*(Vector3 rhs) const
 
 Vector3 Vector3::operator/(Vector3 rhs) const
 {
-    // TODO(Mikyan): check Z and W to avoid division by zero.
+    // TODO(Mikyan): check Z to avoid division by zero.
     return Vector3(
 		m_Value32[0] / rhs.m_Value32[0],
 		m_Value32[1] / rhs.m_Value32[1],

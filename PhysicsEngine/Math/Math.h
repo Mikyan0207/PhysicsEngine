@@ -1,7 +1,14 @@
+#pragma once
+
+#include <cmath>
+#include <cfloat>
 
 PE_NAMESPACE_BEGIN
 
-static constexpr PE_PI = 3.14159265358979323846f;
+#define PE_FLOAT_CMP(x, y) \
+	(fabsf((x) - (y)) <= FLT_EPSILON * fmaxf(1.0f, fmaxf(fabsf(x), fabsf(y))))
+
+static constexpr float PE_PI = 3.14159265358979323846f;
 
 constexpr float DegreesToRadians(float v)
 {

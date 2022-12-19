@@ -9,13 +9,15 @@
 
 PE_NAMESPACE_BEGIN
 
-class [[nodiscard]] alignas(PE_VECTOR_ALIGNMENT) Vector3
+class [[nodiscard]] alignas(PE_VECTOR4_ALIGNMENT) Vector3
 {
   public:
 #if defined(PE_USE_SSE)
     using Type = __m128;
 #else
-    using Type = Vector4::Type;
+    using Type = struct {
+		float m_Data[3];
+	};
 #endif
 
     Vector3() = default;
@@ -27,9 +29,11 @@ class [[nodiscard]] alignas(PE_VECTOR_ALIGNMENT) Vector3
     {
     }
 
+	PE_INLINE static Vector3 Vector3::Fill(float v);
+
     PE_INLINE float operator[](std::uint32_t index) const
     {
-		PE_ASSERT(index >= 0 && index < 3);
+		PE_ASSERT(index < 3);
         return m_Value32[index];
     }
 
@@ -115,9 +119,14 @@ class [[nodiscard]] alignas(PE_VECTOR_ALIGNMENT) Vector3
         m_Value32[2] = z;
     }
 
+	friend std::ostream& operator<<(std::ostream& stream, Vector3 v)
+	{
+		return stream << "Vector3<" << v.m_Value32[0] << ", " << v.m_Value32[1] << ", " << v.m_Value32[0] << ">";
+	}
+
     union {
         Type m_Value;
-        float m_Value32[4];
+        float m_Value32[3];
     };
 };
 

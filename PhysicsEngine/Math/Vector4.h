@@ -4,11 +4,12 @@
 #include <PhysicsEngine/Math/Types.h>
 
 #include <cstdint>
+#include <ostream>
 #include <type_traits>
 
 PE_NAMESPACE_BEGIN
 
-class [[nodiscard]] alignas(PE_VECTOR_ALIGNMENT) Vector4
+class [[nodiscard]] alignas(PE_VECTOR4_ALIGNMENT) Vector4
 {
   public:
 #if defined(PE_USE_SSE)
@@ -28,6 +29,8 @@ class [[nodiscard]] alignas(PE_VECTOR_ALIGNMENT) Vector4
     PE_INLINE Vector4(Type rhs) : m_Value(rhs)
     {
     }
+
+	static PE_INLINE Vector4 Fill(float v);
 
     PE_INLINE float operator[](std::uint32_t index) const
     {
@@ -100,6 +103,11 @@ class [[nodiscard]] alignas(PE_VECTOR_ALIGNMENT) Vector4
     {
         m_Value32[3] = w;
     }
+
+	friend std::ostream& operator<<(std::ostream& stream, Vector4 v)
+	{
+		return stream << "Vector4<" << v.m_Value32[0] << ", " << v.m_Value32[1] << ", " << v.m_Value32[2] << ", " << v.m_Value32[3] << ">";
+	}
 
     union {
         Type m_Value;

@@ -2,7 +2,7 @@
 
 PE_NAMESPACE_BEGIN
 
-Vector4::Vector4(Vector3 rhs) : m_Value(rhs.m_Value)
+Vector4::Vector4(Vector3 rhs) : Vector4(rhs, 0)
 {
 }
 
@@ -20,6 +20,11 @@ Vector4::Vector4(float x, float y, float z, float w)
 	m_Value32[1] = y;
 	m_Value32[2] = z;
 	m_Value32[3] = w;
+}
+
+Vector4 Vector4::Fill(float v)
+{
+	return Vector4(v, v, v, v);
 }
 
 bool Vector4::operator==(Vector4 rhs) const

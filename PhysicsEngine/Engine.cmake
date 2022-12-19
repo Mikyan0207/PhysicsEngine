@@ -3,6 +3,7 @@ set(PHYSICS_ENGINE_ROOT ${REPOSITORY_ROOT}/PhysicsEngine)
 set(SOURCE_FILES
     ${PHYSICS_ENGINE_ROOT}/PhysicsEngine.h
     ${PHYSICS_ENGINE_ROOT}/Core/Core.h
+    ${PHYSICS_ENGINE_ROOT}/Core/Assert.cpp
     ${PHYSICS_ENGINE_ROOT}/Core/Assert.h
     ${PHYSICS_ENGINE_ROOT}/Math/Math.h
     ${PHYSICS_ENGINE_ROOT}/Math/Types.h
@@ -13,7 +14,16 @@ set(SOURCE_FILES
     ${PHYSICS_ENGINE_ROOT}/Math/Vector4.inl
     ${PHYSICS_ENGINE_ROOT}/Math/Vector3.cpp
     ${PHYSICS_ENGINE_ROOT}/Math/Vector3.inl
-    ${PHYSICS_ENGINE_ROOT}/Math/Vector3.h)
+    ${PHYSICS_ENGINE_ROOT}/Math/Vector3.h
+    ${PHYSICS_ENGINE_ROOT}/Math/Vector2.h
+    ${PHYSICS_ENGINE_ROOT}/Math/Vector2.inl
+    ${PHYSICS_ENGINE_ROOT}/Math/Mat4x4.h
+    ${PHYSICS_ENGINE_ROOT}/Math/Mat4x4.inl
+	${PHYSICS_ENGINE_ROOT}/Math/Mat3x3.h
+    ${PHYSICS_ENGINE_ROOT}/Math/Mat3x3.inl
+    ${PHYSICS_ENGINE_ROOT}/Math/Mat2x2.h
+    ${PHYSICS_ENGINE_ROOT}/Math/Mat2x2.inl
+    ${PHYSICS_ENGINE_ROOT}/Engine.cmake)
 
 if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
 	# Add natvis file

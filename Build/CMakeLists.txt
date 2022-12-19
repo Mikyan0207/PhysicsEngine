@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
 project(PhysicsEngine CXX)
 
+option(TARGET_UNIT_TESTS "Build Unit Tests" ON)
+
 include(CMakeDependentOption)
 
 # Ability to toggle between the static and DLL versions of the MSVC runtime library
@@ -45,6 +47,22 @@ set(CMAKE_CXX_FLAGS_RELEASEASAN "-fsanitize=address /Od")
 set(CMAKE_CXX_FLAGS_RELEASEUBSAN "-fsanitize=undefined,implicit-conversion,float-divide-by-zero,local-bounds -fno-sanitize-recover=all")
 set(CMAKE_CXX_FLAGS_RELEASECOVERAGE "-fprofile-instr-generate -fcoverage-mapping")
 
+# Set linker flags
+set(CMAKE_EXE_LINKER_FLAGS_DISTRIBUTION "${CMAKE_EXE_LINKER_FLAGS_RELEASE}")
+
 set(REPOSITORY_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/../)
 
 include(${REPOSITORY_ROOT}/PhysicsEngine/Engine.cmake)
+
+if (TARGET_UNIT_TESTS)
+  include(${REPOSITORY_ROOT}/Tests/Tests.cmake)
+  add_executable(Tests ${TESTS_SOURCE_FILES})
+  target_include_directories(Tests PUBLIC ${TESTS_ROOT})
+  target_link_libraries(Tests LINK_PUBLIC PhysicsEngine)
+  target_precompile_headers(Tests PRIVATE ${PHYSICS_ENGINE_ROOT}/PhysicsEngine.h)
+  if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows" AND NOT MINGW)
+    target_link_options(Tests PUBLIC "/SUBSYSTEM:CONSOLE")
+  endif()
+  enable_testing()
+  add_test(Tests Tests)
+endif()

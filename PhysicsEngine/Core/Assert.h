@@ -4,6 +4,10 @@
 
 PE_NAMESPACE_BEGIN
 
+using TraceFunction = void (*)(const char* fmt, ...);
+extern TraceFunction Trace;
+
+
 #if defined(_DEBUG) && !defined(PE_ENABLE_ASSERTS)
 #define PE_ENABLE_ASSERTS
 #endif
