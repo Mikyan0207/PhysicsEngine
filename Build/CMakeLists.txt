@@ -18,7 +18,7 @@ endif()
 
 # Fill in the path to the asan libraries
 set(CLANG_LIB_PATH "\"$(VSInstallDir)\\VC\\Tools\\Llvm\\x64\\lib\\clang\\${CMAKE_CXX_COMPILER_VERSION}\\lib\\windows\"")
-	
+
 # 64 bit architecture
 set(CMAKE_VS_PLATFORM_TOOLSET_HOST_ARCHITECTURE "x64")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -38,6 +38,7 @@ string(REPLACE "/GR" "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
 
 # Set compiler flag for disabling RTTI
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /GR-")
+set(CMAKE_CXX_CLANG_TIDY "${CLANGTIDY};-extra-arg=-Wno-unknown-warning-option;-header-filter=${CMAKE_CURRENT_SOURCE_DIR}/../PhysicsEngine/*")
 
 # Set compiler flags for various configurations
 set(CMAKE_CXX_FLAGS_DEBUG "/GS /Od /Ob0 /RTC1")
@@ -59,7 +60,6 @@ if (TARGET_UNIT_TESTS)
   add_executable(Tests ${TESTS_SOURCE_FILES})
   target_include_directories(Tests PUBLIC ${TESTS_ROOT})
   target_link_libraries(Tests LINK_PUBLIC PhysicsEngine)
-  target_precompile_headers(Tests PRIVATE ${PHYSICS_ENGINE_ROOT}/PhysicsEngine.h)
   if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows" AND NOT MINGW)
     target_link_options(Tests PUBLIC "/SUBSYSTEM:CONSOLE")
   endif()

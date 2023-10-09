@@ -1,8 +1,6 @@
 #pragma once
 
-
-#include <PhysicsEngine/Core/Core.h>
-
+#include <PhysicsEngine/Core/Core.hpp>
 #include <ostream>
 
 PE_NAMESPACE_BEGIN
@@ -18,8 +16,8 @@ class [[nodiscard]] Float3
 
     float operator[](int index) const
     {
-      // TODO(Mikyan): assert index >= 0 && index < 3
-      return *(&X + index);
+        // TODO(Mikyan): assert index >= 0 && index < 3
+        return *(&X + index);
     }
 
     bool operator==(const Float3& rhs)
@@ -44,4 +42,4 @@ class [[nodiscard]] Float3
 
 static_assert(std::is_trivial<Float3>(), "Float3 must be a trivial type.");
 
-PE_NAMESPACE_END
+PE_NAMESPACE_END // namespace Physics

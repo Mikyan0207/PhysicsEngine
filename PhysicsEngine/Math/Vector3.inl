@@ -1,5 +1,6 @@
-#include <PhysicsEngine/Math/Vector4.h>
-
+#include <PhysicsEngine/Math/Float3.hpp>
+#include <PhysicsEngine/Math/Vector3.hpp>
+#include <PhysicsEngine/Math/Vector4.hpp>
 #include <cmath>
 
 PE_NAMESPACE_BEGIN
@@ -8,7 +9,7 @@ PE_NAMESPACE_BEGIN
 
 Vector3::Vector3(Vector4 rhs)
 {
-	Type value = {};
+    Type value = {};
 
     value.m_Data[0] = rhs.m_Value.m_Data[0];
     value.m_Data[1] = rhs.m_Value.m_Data[1];
@@ -33,87 +34,58 @@ Vector3::Vector3(float x, float y, float z)
 
 Vector3 Vector3::Fill(float v)
 {
-	return Vector3(v, v, v);
+    return Vector3(v, v, v);
 }
 
 bool Vector3::operator==(Vector3 rhs) const
 {
-    return m_Value32[0] == rhs.m_Value32[0]
-		&& m_Value32[1] == rhs.m_Value32[1]
-		&& m_Value32[2] == rhs.m_Value32[2];
+    return m_Value32[0] == rhs.m_Value32[0] && m_Value32[1] == rhs.m_Value32[1] && m_Value32[2] == rhs.m_Value32[2];
+}
+
+bool Vector3::operator!=(Vector3 rhs) const
+{
+    return !(*this == rhs);
 }
 
 Vector3 Vector3::operator*(Vector3 rhs) const
 {
-    return Vector3(
-		m_Value32[0] * rhs.m_Value32[0],
-		m_Value32[1] * rhs.m_Value32[1],
-		m_Value32[2] * m_Value32[2]
-	);
+    return Vector3(m_Value32[0] * rhs.m_Value32[0], m_Value32[1] * rhs.m_Value32[1], m_Value32[2] * m_Value32[2]);
 }
 
 Vector3 Vector3::operator/(Vector3 rhs) const
 {
     // TODO(Mikyan): check Z to avoid division by zero.
-    return Vector3(
-		m_Value32[0] / rhs.m_Value32[0],
-		m_Value32[1] / rhs.m_Value32[1],
-		m_Value32[2] / rhs.m_Value32[2]
-	);
+    return Vector3(m_Value32[0] / rhs.m_Value32[0], m_Value32[1] / rhs.m_Value32[1], m_Value32[2] / rhs.m_Value32[2]);
 }
 
 Vector3 Vector3::operator+(Vector3 rhs) const
 {
-    return Vector3(
-		m_Value32[0] + rhs.m_Value32[0],
-		m_Value32[1] + rhs.m_Value32[1],
-		m_Value32[2] + rhs.m_Value32[2]
-	);
+    return Vector3(m_Value32[0] + rhs.m_Value32[0], m_Value32[1] + rhs.m_Value32[1], m_Value32[2] + rhs.m_Value32[2]);
 }
 
 Vector3 Vector3::operator-(Vector3 rhs) const
 {
-    return Vector3(
-		m_Value32[0] - rhs.m_Value32[0],
-		m_Value32[1] - rhs.m_Value32[1],
-		m_Value32[2] - rhs.m_Value32[2]
-	);
+    return Vector3(m_Value32[0] - rhs.m_Value32[0], m_Value32[1] - rhs.m_Value32[1], m_Value32[2] - rhs.m_Value32[2]);
 }
 
 Vector3 Vector3::operator*(float s) const
 {
-    return Vector3(
-		m_Value32[0] * s,
-		m_Value32[1] * s,
-		m_Value32[2] * s
-	);
+    return Vector3(m_Value32[0] * s, m_Value32[1] * s, m_Value32[2] * s);
 }
 
 Vector3 Vector3::operator/(float s) const
 {
-    return Vector3(
-		m_Value32[0] / s,
-		m_Value32[1] / s,
-		m_Value32[2] / s
-	);
+    return Vector3(m_Value32[0] / s, m_Value32[1] / s, m_Value32[2] / s);
 }
 
 Vector3 Vector3::operator+(float s) const
 {
-    return Vector3(
-		m_Value32[0] + s,
-		m_Value32[1] + s,
-		m_Value32[2] + s
-	);
+    return Vector3(m_Value32[0] + s, m_Value32[1] + s, m_Value32[2] + s);
 }
 
 Vector3 Vector3::operator-(float s) const
 {
-    return Vector3(
-		m_Value32[0] - s,
-		m_Value32[1] - s,
-		m_Value32[2] - s
-	);
+    return Vector3(m_Value32[0] - s, m_Value32[1] - s, m_Value32[2] - s);
 }
 
 Vector3& Vector3::operator*=(Vector3 rhs)
@@ -198,9 +170,7 @@ Vector3& Vector3::operator-=(float s)
 
 float Vector3::Dot(Vector3 rhs) const
 {
-    return m_Value32[0] * rhs.m_Value32[0]
-		+ m_Value32[1] * rhs.m_Value32[1]
-		+ m_Value32[2] * rhs.m_Value32[2];
+    return m_Value32[0] * rhs.m_Value32[0] + m_Value32[1] * rhs.m_Value32[1] + m_Value32[2] * rhs.m_Value32[2];
 }
 
 float Vector3::Magnitude() const
@@ -239,38 +209,38 @@ Vector3 Vector3::Normalized() const
 
 Vector3 Vector3::Cross(Vector3 rhs) const
 {
-	return Vector3(
-		m_Value32[1] * rhs.m_Value32[2] - m_Value32[2] * rhs.m_Value32[1], /// X = lhs.Y * rhs.Z - lhs.Z * rhs.Y
-		m_Value32[2] * rhs.m_Value32[0] - m_Value32[0] * rhs.m_Value32[2], /// Y = lhs.Z * rhs.X - lhs.X * rhs.Z
-		m_Value32[0] * rhs.m_Value32[1] - m_Value32[1] * rhs.m_Value32[0]  /// Z = lhs.X * rhs.Y - lhs.Y * rhs.X
-	);
+    return Vector3(
+        m_Value32[1] * rhs.m_Value32[2] - m_Value32[2] * rhs.m_Value32[1], /// X = lhs.Y * rhs.Z - lhs.Z * rhs.Y
+        m_Value32[2] * rhs.m_Value32[0] - m_Value32[0] * rhs.m_Value32[2], /// Y = lhs.Z * rhs.X - lhs.X * rhs.Z
+        m_Value32[0] * rhs.m_Value32[1] - m_Value32[1] * rhs.m_Value32[0]  /// Z = lhs.X * rhs.Y - lhs.Y * rhs.X
+    );
 }
 
 float Vector3::Angle(Vector3 rhs) const
 {
-	float m = std::sqrtf(SquaredMagnitude() * rhs.SquaredMagnitude());
+    float m = std::sqrtf(SquaredMagnitude() * rhs.SquaredMagnitude());
 
-	return std::acos(Dot(rhs) / m);
+    return std::acos(Dot(rhs) / m);
 }
 
 Vector3 Vector3::Project(Vector3 rhs) const
 {
-	float dot = Dot(rhs);
-	float sqMag = rhs.SquaredMagnitude();
+    float dot = Dot(rhs);
+    float sqMag = rhs.SquaredMagnitude();
 
-	return rhs * (dot  / sqMag);
+    return rhs * (dot / sqMag);
 }
 
 Vector3 Vector3::Perpendicular(Vector3 rhs) const
 {
-	return *this - Project(rhs);
+    return *this - Project(rhs);
 }
 
 Vector3 Vector3::Reflection(Vector3 normal) const
 {
-	float dot = Dot(normal);
+    float dot = Dot(normal);
 
-	return *this - normal * (dot * 2.0f);
+    return *this - normal * (dot * 2.0f);
 }
 
-PE_NAMESPACE_END
+PE_NAMESPACE_END // namespace Physics

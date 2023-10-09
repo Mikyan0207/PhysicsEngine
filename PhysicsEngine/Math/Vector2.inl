@@ -1,224 +1,211 @@
+#include <PhysicsEngine/Math/Float2.hpp>
+#include <PhysicsEngine/Math/Vector2.hpp>
+#include <PhysicsEngine/Math/Vector3.hpp>
 #include <cmath>
 
 PE_NAMESPACE_BEGIN
 
 Vector2::Vector2(Float2 rhs)
 {
-	m_Value32[0] = rhs.X;
-	m_Value32[1] = rhs.Y;
+    m_Value32[0] = rhs.X;
+    m_Value32[1] = rhs.Y;
 }
 
 Vector2::Vector2(Vector3 rhs)
 {
-	m_Value32[0] = rhs.m_Value32[0];
-	m_Value32[1] = rhs.m_Value32[1];
+    m_Value32[0] = rhs.m_Value32[0];
+    m_Value32[1] = rhs.m_Value32[1];
 }
 
 Vector2::Vector2(float x, float y)
 {
-	m_Value32[0] = x;
-	m_Value32[1] = y;
+    m_Value32[0] = x;
+    m_Value32[1] = y;
 }
 
 Vector2 Vector2::Fill(float v)
 {
-	return Vector2(v, v);
+    return Vector2(v, v);
+}
+
+bool Vector2::operator==(Vector2 rhs) const
+{
+    return m_Value32[0] == rhs.m_Value32[0] && m_Value32[1] == rhs.m_Value32[1];
+}
+
+bool Vector2::operator!=(Vector2 rhs) const
+{
+    return !(*this == rhs);
 }
 
 Vector2 Vector2::operator*(Vector2 rhs) const
 {
-	return Vector2(
-		m_Value32[0] * rhs.m_Value32[0],
-		m_Value32[1] * rhs.m_Value32[1]
-	);
+    return Vector2(m_Value32[0] * rhs.m_Value32[0], m_Value32[1] * rhs.m_Value32[1]);
 }
 
 Vector2 Vector2::operator/(Vector2 rhs) const
 {
-	return Vector2(
-		m_Value32[0] / rhs.m_Value32[0],
-		m_Value32[1] / rhs.m_Value32[1]
-	);
+    return Vector2(m_Value32[0] / rhs.m_Value32[0], m_Value32[1] / rhs.m_Value32[1]);
 }
 
 Vector2 Vector2::operator+(Vector2 rhs) const
 {
-	return Vector2(
-		m_Value32[0] + rhs.m_Value32[0],
-		m_Value32[1] + rhs.m_Value32[1]
-	);
+    return Vector2(m_Value32[0] + rhs.m_Value32[0], m_Value32[1] + rhs.m_Value32[1]);
 }
 
 Vector2 Vector2::operator-(Vector2 rhs) const
 {
-	return Vector2(
-		m_Value32[0] - rhs.m_Value32[0],
-		m_Value32[0] - rhs.m_Value32[1]
-	);
+    return Vector2(m_Value32[0] - rhs.m_Value32[0], m_Value32[0] - rhs.m_Value32[1]);
 }
 
 Vector2 Vector2::operator*(float s) const
 {
-	return Vector2(
-		m_Value32[0] * s,
-		m_Value32[1] * s
-	);
+    return Vector2(m_Value32[0] * s, m_Value32[1] * s);
 }
 
 Vector2 Vector2::operator/(float s) const
 {
-	return Vector2(
-		m_Value32[0] / s,
-		m_Value32[1] / s
-	);
+    return Vector2(m_Value32[0] / s, m_Value32[1] / s);
 }
 
 Vector2 Vector2::operator+(float s) const
 {
-	return Vector2(
-		m_Value32[0] + s,
-		m_Value32[1] + s
-	);
+    return Vector2(m_Value32[0] + s, m_Value32[1] + s);
 }
 
 Vector2 Vector2::operator-(float s) const
 {
-	return Vector2(
-		m_Value32[0] - s,
-		m_Value32[1] - s
-	);
+    return Vector2(m_Value32[0] - s, m_Value32[1] - s);
 }
 
 Vector2& Vector2::operator*=(Vector2 rhs)
 {
-	for (int i = 0; i < 2; i++)
-		m_Value32[i] *= rhs.m_Value32[i];
+    for (int i = 0; i < 2; i++)
+        m_Value32[i] *= rhs.m_Value32[i];
 
-	return *this;
+    return *this;
 }
 
 Vector2& Vector2::operator/=(Vector2 rhs)
 {
-	for (int i = 0; i < 2; i++)
-		m_Value32[i] /= rhs.m_Value32[i];
+    for (int i = 0; i < 2; i++)
+        m_Value32[i] /= rhs.m_Value32[i];
 
-	return *this;
+    return *this;
 }
 
 Vector2& Vector2::operator+=(Vector2 rhs)
 {
-	for (int i = 0; i < 2; i++)
-		m_Value32[i] += rhs.m_Value32[i];
+    for (int i = 0; i < 2; i++)
+        m_Value32[i] += rhs.m_Value32[i];
 
-	return *this;
+    return *this;
 }
 
 Vector2& Vector2::operator-=(Vector2 rhs)
 {
-	for (int i = 0; i < 2; i++)
-		m_Value32[i] -= rhs.m_Value32[i];
+    for (int i = 0; i < 2; i++)
+        m_Value32[i] -= rhs.m_Value32[i];
 
-	return *this;
+    return *this;
 }
 
 Vector2& Vector2::operator*=(float s)
 {
-	for (int i = 0; i < 2; i++)
-		m_Value32[i] *= s;
+    for (int i = 0; i < 2; i++)
+        m_Value32[i] *= s;
 
-	return *this;
+    return *this;
 }
 
 Vector2& Vector2::operator/=(float s)
 {
-	for (int i = 0; i < 2; i++)
-		m_Value32[i] /= s;
+    for (int i = 0; i < 2; i++)
+        m_Value32[i] /= s;
 
-	return *this;
+    return *this;
 }
 
 Vector2& Vector2::operator+=(float s)
 {
-	for (int i = 0; i < 2; i++)
-		m_Value32[i] += s;
+    for (int i = 0; i < 2; i++)
+        m_Value32[i] += s;
 
-	return *this;
+    return *this;
 }
 
 Vector2& Vector2::operator-=(float s)
 {
-	for (int i = 0; i < 2; i++)
-		m_Value32[i] -= s;
+    for (int i = 0; i < 2; i++)
+        m_Value32[i] -= s;
 
-	return *this;
+    return *this;
 }
 
 float Vector2::Dot(Vector2 rhs) const
 {
-	return m_Value32[0] * rhs.m_Value32[0]
-		+ m_Value32[1] * rhs.m_Value32[1];
+    return m_Value32[0] * rhs.m_Value32[0] + m_Value32[1] * rhs.m_Value32[1];
 }
 
 float Vector2::Length() const
 {
-	return std::sqrtf(Dot(*this));
+    return std::sqrtf(Dot(*this));
 }
 
 float Vector2::LengthSquared() const
 {
-	return Dot(*this);
+    return Dot(*this);
 }
 
 float Vector2::Distance(Vector2 rhs) const
 {
-	auto d = *this - rhs;
+    auto d = *this - rhs;
 
-	return d.Length();
+    return d.Length();
 }
 
 float Vector2::DistanceSquared(Vector2 rhs) const
 {
-	auto d = *this - rhs;
+    auto d = *this - rhs;
 
-	return d.LengthSquared();
+    return d.LengthSquared();
 }
 
 Vector2 Vector2::Normalized() const
 {
-	return *this / Length();
+    return *this / Length();
 }
 
 void Vector2::Normalize()
 {
-	*this /= Length();
+    *this /= Length();
 }
 
 float Vector2::Angle(Vector2 rhs) const
 {
-	float l = std::sqrtf(LengthSquared() * rhs.LengthSquared());
+    float l = std::sqrtf(LengthSquared() * rhs.LengthSquared());
 
-	return std::acos(Dot(rhs) / l);
+    return std::acos(Dot(rhs) / l);
 }
 
 Vector2 Vector2::Project(Vector2 rhs) const
 {
-	float dot = Dot(rhs);
-	float lengthSq = rhs.LengthSquared();
+    float dot = Dot(rhs);
+    float lengthSq = rhs.LengthSquared();
 
-	return rhs * (dot / lengthSq);
+    return rhs * (dot / lengthSq);
 }
 
 Vector2 Vector2::Perpendicular(Vector2 rhs) const
 {
-	return *this - Project(rhs);
+    return *this - Project(rhs);
 }
 
 Vector2 Vector2::Reflection(Vector2 normal) const
 {
-	float dot = Dot(normal);
+    float dot = Dot(normal);
 
-	return *this - normal * (dot * 2.0f);
+    return *this - normal * (dot * 2.0f);
 }
 
-PE_NAMESPACE_END
-
+PE_NAMESPACE_END // namespace Physics

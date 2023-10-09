@@ -1,10 +1,10 @@
 #pragma once
 
-#include <PhysicsEngine/Core/Assert.h>
-#include <PhysicsEngine/Math/Float3.h>
-#include <PhysicsEngine/Math/Types.h>
+#include <PhysicsEngine/Core/Assert.hpp>
+#include <PhysicsEngine/Math/Types.hpp>
 
 #include <cstdint>
+#include <ostream>
 #include <type_traits>
 
 PE_NAMESPACE_BEGIN
@@ -15,9 +15,10 @@ class [[nodiscard]] alignas(PE_VECTOR4_ALIGNMENT) Vector3
 #if defined(PE_USE_SSE)
     using Type = __m128;
 #else
-    using Type = struct {
-		float m_Data[3];
-	};
+    using Type = struct
+    {
+        float m_Data[3];
+    };
 #endif
 
     Vector3() = default;
@@ -29,19 +30,16 @@ class [[nodiscard]] alignas(PE_VECTOR4_ALIGNMENT) Vector3
     {
     }
 
-	PE_INLINE static Vector3 Vector3::Fill(float v);
+    static Vector3 Fill(float v);
 
     PE_INLINE float operator[](std::uint32_t index) const
     {
-		PE_ASSERT(index < 3);
+        PE_ASSERT(index < 3);
         return m_Value32[index];
     }
 
     PE_INLINE bool operator==(Vector3 rhs) const;
-    PE_INLINE bool operator!=(Vector3 rhs) const
-    {
-        return !(*this == rhs);
-    }
+    PE_INLINE bool operator!=(Vector3 rhs) const;
 
     PE_INLINE Vector3 operator*(Vector3 rhs) const;
     PE_INLINE Vector3 operator/(Vector3 rhs) const;
@@ -65,29 +63,30 @@ class [[nodiscard]] alignas(PE_VECTOR4_ALIGNMENT) Vector3
 
     PE_INLINE float Dot(Vector3 rhs) const;
 
-	PE_INLINE float Magnitude() const;
-	PE_INLINE float SquaredMagnitude() const;
+    PE_INLINE float Magnitude() const;
+    PE_INLINE float SquaredMagnitude() const;
 
-	PE_INLINE float Distance(Vector3 rhs) const;
-	PE_INLINE float SquaredDistance(Vector3 rhs) const;
+    PE_INLINE float Distance(Vector3 rhs) const;
+    PE_INLINE float SquaredDistance(Vector3 rhs) const;
 
-	PE_INLINE void Normalize();
-	PE_INLINE Vector3 Normalized() const;
+    PE_INLINE void Normalize();
+    PE_INLINE Vector3 Normalized() const;
 
-	PE_INLINE Vector3 Cross(Vector3 rhs) const;
+    PE_INLINE Vector3 Cross(Vector3 rhs) const;
 
-	/// <summary>
-	/// Returns the angle between this <see cref="Vector3" /> instance and the <see cref="Vector3" /> passed as parameter.
-	/// </summary>
-	/// <remarks>
-	/// The angle is expressed in radians. Use `RadiansToDegrees()` if you need to convert it.
-	/// </remarks>
-	PE_INLINE float Angle(Vector3 rhs) const;
+    /// <summary>
+    /// Returns the angle between this <see cref="Vector3" /> instance and the <see cref="Vector3" /> passed as
+    /// parameter.
+    /// </summary>
+    /// <remarks>
+    /// The angle is expressed in radians. Use `RadiansToDegrees()` if you need to convert it.
+    /// </remarks>
+    PE_INLINE float Angle(Vector3 rhs) const;
 
-	PE_INLINE Vector3 Project(Vector3 rhs) const;
-	PE_INLINE Vector3 Perpendicular(Vector3 rhs) const;
+    PE_INLINE Vector3 Project(Vector3 rhs) const;
+    PE_INLINE Vector3 Perpendicular(Vector3 rhs) const;
 
-	PE_INLINE Vector3 Reflection(Vector3 normal) const;
+    PE_INLINE Vector3 Reflection(Vector3 normal) const;
 
     PE_INLINE float GetX() const
     {
@@ -119,10 +118,10 @@ class [[nodiscard]] alignas(PE_VECTOR4_ALIGNMENT) Vector3
         m_Value32[2] = z;
     }
 
-	friend std::ostream& operator<<(std::ostream& stream, Vector3 v)
-	{
-		return stream << "Vector3<" << v.m_Value32[0] << ", " << v.m_Value32[1] << ", " << v.m_Value32[0] << ">";
-	}
+    friend std::ostream& operator<<(std::ostream& stream, Vector3 v)
+    {
+        return stream << "Vector3<" << v.m_Value32[0] << ", " << v.m_Value32[1] << ", " << v.m_Value32[0] << ">";
+    }
 
     union {
         Type m_Value;
@@ -132,6 +131,6 @@ class [[nodiscard]] alignas(PE_VECTOR4_ALIGNMENT) Vector3
 
 static_assert(std::is_trivial<Vector3>(), "Vector3 must be a trivial type.");
 
-PE_NAMESPACE_END
+PE_NAMESPACE_END // namespace Physics
 
-#include "Vector3.inl"
+#include <PhysicsEngine/Math/Vector3.inl>

@@ -1,12 +1,12 @@
 #pragma once
 
+#include <PhysicsEngine/Core/Core.hpp>
 #include <cstdint>
 
 PE_NAMESPACE_BEGIN
 
 using TraceFunction = void (*)(const char* fmt, ...);
 extern TraceFunction Trace;
-
 
 #if defined(_DEBUG) && !defined(PE_ENABLE_ASSERTS)
 #define PE_ENABLE_ASSERTS
@@ -52,4 +52,4 @@ inline bool AssertFailedParamHelper(const char* expression, const char* file, st
 
 #endif
 
-PE_NAMESPACE_END
+PE_NAMESPACE_END // namespace Physics

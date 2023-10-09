@@ -1,7 +1,6 @@
 #pragma once
 
-#include <PhysicsEngine/Core/Core.h>
-
+#include <PhysicsEngine/Core/Core.hpp>
 #include <ostream>
 
 PE_NAMESPACE_BEGIN
@@ -36,4 +35,4 @@ class [[nodiscard]] Float2
 
 static_assert(std::is_trivial<Float2>(), "Float2 must be a trivial type.");
 
-PE_NAMESPACE_END
+PE_NAMESPACE_END // namespace Physics
